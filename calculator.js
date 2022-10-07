@@ -1,71 +1,132 @@
-const btnDigit = document.querySelectorAll(".button");
-const mathBtn = document.querySelectorAll(".mathButtons");
-const displayField = document.querySelector("#display");
-const totalBtn = document.querySelector(".total-btn");
+"use strict";
 
-let HowManyTime = 1;
-let a = "";
-let b = "";
-let calcData = "";
-let whichOperator = "";
-//prettier-ignore
-btnDigit.forEach((btn) =>btn.addEventListener("click", function (e) {
-  //prettier-ignore
-  if (e.target.value === "C") {
-            displayField.value = "" 
-            a=''
-            b=''
-            calcData=''
-            whichOperator=''
+// prettier-ignore
+import { valueBtn, calcBtn, totalBtn, clearBtn, display,buttons } from "./domSelect.js";
+// prettier-ignore
+let firstNum = 0, secondNum = 0,  finalResult=0, howManyTime = 1,whichOperator,calcData = "";
+
+buttons.forEach((btn) =>
+  btn.addEventListener("click", function (e) {
+    // prettier-ignore
+    if(e.target.value !== "C" && e.target.value !== "=" ) {
+     
+        display.value += e.target.value;
+            calcData += e.target.value
+            if(display.value.length>15){
+              display.value=` Size Error`
+             setTimeout(() => {
+               empetyEverthing();
+             }, 3000);
             }
+             
+    }
+    clearBtn.addEventListener("click", empetyEverthing);
 
-  if (e.target.value !== "C" && e.target.value !== "=") {
-    displayField.value += e.target.value;
-    calcData += e.target.value;
+    // prettier-ignore
+
+    if(e.target.value==='+'||e.target.value==='-'||e.target.value==='x'||e.target.value==='/'){
+       
+         whichOperator = e.target.value;
+         console.log(whichOperator, "line 26");
+       
   }
-//   console.log(calcData);
+  })
+);
 
-  //prettier-ignore
-  
-        totalBtn.addEventListener("click", () => {
-            // console.log('button clicked total')
-            if (
-              e.target.value === "+" ||
-              e.target.value === "-" ||
-              e.target.value === "x" ||
-              e.target.value === "/"
-            ) {
-              whichOperator = e.target.value;
-            //   console.log(whichOperator);
-            }
+//it will work when howManyTime variable becomes zero(0)
+totalBtn.addEventListener("click", function () {
+  if (howManyTime > 0) return;
+  try {
+    console.log(calcData);
+    const data = calcData.split(whichOperator);
 
-          //prettier-ignore
-          try{ 
-    
-         const values=   calcData.split(whichOperator)
-           a= values[0]
-           b=values[1]
-         switch (a>=0 && b>=0) {
+    firstNum = +finalResult;
+    secondNum = +data[1];
+    console.log(firstNum, secondNum);
 
-                case (whichOperator === "+"): {
-                    displayField.value = (+a) + (+b);
-                    break
-                }
-                case (whichOperator === "-"): {
-                    displayField.value = a - b;
-                    break
-                }
-                case (whichOperator === "x"): {
-                    displayField.value = a *b;
-                    break
-                }
-                case (whichOperator === "/"): {
-                    displayField.value = (a / b).toFixed(2);
-                    break
-                            }
-        } }catch(err){console.error(err)}
-        });
-})
-    );
+    switch (whichOperator) {
+      case "+": {
+        finalResult = firstNum + secondNum;
+        display.value = finalResult;
+        console.log(finalResult);
+        break;
+      }
+      case "-": {
+        finalResult = firstNum - secondNum;
+        display.value = finalResult;
+        console.log(finalResult);
+        break;
+      }
+      case "x": {
+        finalResult = firstNum * secondNum;
+        display.value = finalResult;
+        console.log(finalResult);
+        break;
+      }
+      case "/": {
+        finalResult = firstNum / secondNum;
+        display.value = finalResult.toFixed(1);
+        console.log(finalResult);
+        break;
+      }
+    }
+    howManyTime--;
+    calcData = "";
+  } catch (err) {
+    console.error(err);
+  }
+});
 
-//prettier-ignore
+totalBtn.addEventListener("click", function (e) {
+  if (howManyTime > 0) {
+    if (!display.value) return;
+    try {
+      console.log(calcData);
+      const data = calcData.split(whichOperator);
+      firstNum = +data[0];
+      secondNum = +data[1];
+      console.log(firstNum, secondNum);
+
+      switch (whichOperator) {
+        case "+": {
+          finalResult = firstNum + secondNum;
+          display.value = finalResult;
+          console.log(finalResult);
+          break;
+        }
+        case "-": {
+          finalResult = firstNum - secondNum;
+          display.value = finalResult;
+          console.log(finalResult);
+          break;
+        }
+        case "x": {
+          finalResult = firstNum * secondNum;
+          display.value = finalResult;
+          console.log(finalResult);
+          break;
+        }
+        case "/": {
+          finalResult = firstNum / secondNum;
+          display.value = finalResult.toFixed(1);
+          console.log(finalResult);
+          break;
+        }
+      }
+      howManyTime--;
+      calcData = "";
+    } catch (err) {
+      console.error(err);
+    }
+  }
+});
+
+function empetyEverthing() {
+  display.value = "";
+  firstNum = 0;
+  secondNum = 0;
+  finalResult = 0;
+  howManyTime = 1;
+  calcData = "";
+  console.log(firstNum, secondNum, finalResult, howManyTime, calcData);
+}
