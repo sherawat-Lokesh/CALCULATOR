@@ -22,37 +22,14 @@ operationBtn.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     if (operationBtnClickTime !== 0) return;
     if (operationBtnClickTime === 0) {
-      calcData = display.value;
-      console.log(whichOperator);
-      const [firstNum, secondNum] = calcData.split(whichOperator);
-      if (!firstNum && !secondNum) return;
-      operationBtnClickTime = 1;
-      switch (whichOperator) {
-        case "x": {
-          finalResult = firstNum * secondNum;
-          display.value = finalResult;
-          return;
-        }
-        case "+": {
-          finalResult = +firstNum + +secondNum;
-          display.value = finalResult;
-          return;
-        }
-        case "-": {
-          finalResult = firstNum - secondNum;
-          display.value = finalResult;
-          return;
-        }
-        case "/": {
-          finalResult = firstNum / secondNum;
-          display.value = finalResult;
-          return;
-        }
-      }
+      forCalculationSolving();
     }
   });
 });
-equalBtn.addEventListener("click", function (e) {
+//equal btn click solution
+equalBtn.addEventListener("click", forCalculationSolving);
+
+function forCalculationSolving() {
   calcData = display.value;
   console.log(whichOperator);
   const [firstNum, secondNum] = calcData.split(whichOperator);
@@ -80,7 +57,7 @@ equalBtn.addEventListener("click", function (e) {
       return;
     }
   }
-});
+}
 
 operationBtn.forEach((btn) =>
   btn.addEventListener("click", function (e) {
