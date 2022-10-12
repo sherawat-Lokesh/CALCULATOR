@@ -10,49 +10,50 @@
     <script defer type="module" src="/calculator.js"></script>
 </head>
 
-<body class="bg-black">
+<body class="bg-black overflow-hidden flex justify-center items-center h-screen" name="viewport"
+    content="user-scalable=no">
     <div class="wrap">
-        <fieldset class="container ml-96 mt-44 ">
-            <form name="calculator " class="ml-80">
+        <fieldset class="container   ">
+            <form name="calculator " class="">
 
                 <input id="display"
-                    class="bg-black border-2 border-zinc-800 w-96 pt-14 text-4xl text-end  text-white justify-end"
+                    class=" bg-black border-2 border-zinc-800 w-96 pt-14 text-4xl text-end  text-white justify-end"
                     style="width:23.7rem" type="text" name="display" readonly>
 
                 <div class="text-white flex  space-x-1  text-2xl  mt-1">
-                    <input class="bg-zinc-800 hover:bg-zinc-700 w-44 text-orange-700" style="width:11.2rem ;"
-                        type="button" value="CLEAR">
-                    <input class="bg-zinc-800 hover:bg-zinc-700 w-20" type="button" value="<">
-                    <input class=" bg-zinc-800 hover:bg-zinc-700 w-28 p-4" type="button" value="/">
+                    <input class="clear-btn cursor-pointer bg-zinc-800 hover:bg-zinc-700 w-44 text-orange-700"
+                        style="width:11.2rem ;" type="button" value="CLEAR">
+                    <input class="backspace-btn bg-zinc-800 hover:bg-zinc-700 w-20" type="button" value="⌫">
+                    <input class="operation-btn bg-zinc-800 hover:bg-zinc-700 w-28 p-4" type="button" value="/">
                 </div>
 
                 <div class=" space-x-1 text-white flex mt-1 text-2xl">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-24 " type="button" value="7">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-20" type="button" value="8">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-20" type="button" value="9">
-                    <input class=" bg-zinc-800 hover:bg-zinc-700 w-28 p-5 " type="button" value="x">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-24 " type="button" value="7">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-20" type="button" value="8">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-20" type="button" value="9">
+                    <input class="operation-btn bg-zinc-800 hover:bg-zinc-700 w-28 p-5 " type="button" value="x">
 
                 </div>
 
                 <div class="  space-x-1 text-white flex mt-1 text-2xl">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-24" type="button" value="4">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-20 " type="button" value="5">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-20" type="button" value="6">
-                    <input class=" bg-zinc-800 w-28 hover:bg-zinc-700 p-5" type="button" value="-">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-24" type="button" value="4">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-20 " type="button" value="5">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-20" type="button" value="6">
+                    <input class="operation-btn bg-zinc-800 w-28 hover:bg-zinc-700 p-5" type="button" value="-">
                 </div>
 
                 <div class=" space-x-1 text-white flex mt-1  text-2xl">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-24 " type="button" value="1">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-20 " type="button" value="2">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-20 " type="button" value="3">
-                    <input class=" bg-zinc-800 hover:bg-zinc-700 w-28 p-5" type="button" value="+">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-24 " type="button" value="1">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-20 " type="button" value="2">
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500 w-20 " type="button" value="3">
+                    <input class="operation-btn bg-zinc-800 hover:bg-zinc-700 w-28 p-5" type="button" value="+">
                 </div>
 
                 <div class=" space-x-1 text-white flex mt-1  text-2xl">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500  w-40 pl-1 pr-4" style="width:11.2rem ;"
+                    <input class="math-btn bg-neutral-700 hover:bg-zinc-500  w-40 pl-1 pr-4" style="width:11.2rem ;"
                         type="button" value="0">
-                    <input class=" bg-neutral-700 hover:bg-zinc-500 w-20 text-4xl" type="button" value=".">
-                    <input class="  bg-orange-700 hover:bg-orange-600 w-28 p-5 " type="button" value="=">
+                    <input class="decimal-btn bg-neutral-700 hover:bg-zinc-500 w-20 text-4xl" type="button" value=".">
+                    <input class="equal-btn  bg-orange-700 hover:bg-orange-600 w-28 p-5 " type="button" value="=">
                 </div>
             </form>
         </fieldset>

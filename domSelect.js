@@ -1,7 +1,7 @@
-export const valueBtn = document.querySelectorAll(".value-btn");
-export const calcBtn = document.querySelectorAll(".calc-btn");
-export const totalBtn = document.querySelector(".total-btn");
-export const clearBtn = document.querySelector("#clearButton");
-
+export const mathBtn = document.querySelectorAll(".math-btn");
+export const operationBtn = document.querySelectorAll(".operation-btn");
+export const decimalBtn = document.querySelector(".decimal-btn");
+export const clearBtn = document.querySelector(".clear-btn");
+export const backBtn = document.querySelector(".backspace-btn");
+export const equalBtn = document.querySelector(".equal-btn");
 export const display = document.querySelector("#display");
-export const buttons=document.querySelectorAll('.button')

@@ -1,35 +1,147 @@
 "use strict";
 
 // prettier-ignore
-import { valueBtn, calcBtn, totalBtn, clearBtn, display,buttons } from "./domSelect.js";
+import {display, mathBtn,clearBtn,decimalBtn,equalBtn,operationBtn,backBtn} from "./domSelect.js";
+
 // prettier-ignore
-display.value=230
-let firstNum = 0, secondNum = 0,  finalResult=0, howManyTime = 1,whichOperator,calcData = "";
+let firstNum = 0,secondNum = 0,finalResult = 0,operationBtnClickTime = 1,whichOperator,calcData = "";
 
-buttons.forEach((btn) =>
+mathBtn.forEach((btn) =>
   btn.addEventListener("click", function (e) {
-    // prettier-ignore
-    if(e.target.value !== "C" && e.target.value !== "=" ) {
-     
-        display.value += e.target.value;
-            calcData += e.target.value
-            if(display.value.length>15){
-              display.value=` Size Error`
-             setTimeout(() => {
-               empetyEverthing();
-             }, 3000);
-            }
-             
+    if (display.value.length >= 15) {
+      sizeCheck();
     }
-    clearBtn.addEventListener("click", empetyEverthing);
-
-    // prettier-ignore
-    if(e.target.value==='+'||e.target.value==='-'||e.target.value==='x'||e.target.value==='/'){
-       
-         whichOperator = e.target.value;
-         console.log(whichOperator, "line 26");
-       
-  }
+    if (/[+-/x]/g.test(display.value)) {
+      operationBtnClickTime--;
+    }
+    display.value += e.target.value;
   })
 );
 
+operationBtn.forEach((btn) => {
+  btn.addEventListener("click", function (e) {
+    if (operationBtnClickTime !== 0) return;
+    if (operationBtnClickTime === 0) {
+      calcData = display.value;
+      console.log(whichOperator);
+      const [firstNum, secondNum] = calcData.split(whichOperator);
+      if (!firstNum && !secondNum) return;
+      operationBtnClickTime = 1;
+      switch (whichOperator) {
+        case "x": {
+          finalResult = firstNum * secondNum;
+          display.value = finalResult;
+          return;
+        }
+        case "+": {
+          finalResult = +firstNum + +secondNum;
+          display.value = finalResult;
+          return;
+        }
+        case "-": {
+          finalResult = firstNum - secondNum;
+          display.value = finalResult;
+          return;
+        }
+        case "/": {
+          finalResult = firstNum / secondNum;
+          display.value = finalResult;
+          return;
+        }
+      }
+    }
+  });
+});
+equalBtn.addEventListener("click", function (e) {
+  calcData = display.value;
+  console.log(whichOperator);
+  const [firstNum, secondNum] = calcData.split(whichOperator);
+  if (!firstNum && !secondNum) return;
+  operationBtnClickTime = 1;
+  switch (whichOperator) {
+    case "x": {
+      finalResult = firstNum * secondNum;
+      display.value = finalResult;
+      return;
+    }
+    case "+": {
+      finalResult = +firstNum + +secondNum;
+      display.value = finalResult;
+      return;
+    }
+    case "-": {
+      finalResult = firstNum - secondNum;
+      display.value = finalResult;
+      return;
+    }
+    case "/": {
+      finalResult = firstNum / secondNum;
+      display.value = finalResult;
+      return;
+    }
+  }
+});
+
+operationBtn.forEach((btn) =>
+  btn.addEventListener("click", function (e) {
+    if (operationBtnClickTime === 1) {
+      if (/[+-/x]/g.test(display.value)) {
+        switch (display.value.slice(-1)) {
+          case "x": {
+            display.value = display.value.slice(0, -1);
+            display.value += e.target.value;
+            whichOperator = e.target.value;
+            return;
+          }
+          case "+": {
+            display.value = display.value.slice(0, -1);
+            display.value += e.target.value;
+            whichOperator = e.target.value;
+            return;
+          }
+          case "-": {
+            display.value = display.value.slice(0, -1);
+            display.value += e.target.value;
+            whichOperator = e.target.value;
+            return;
+          }
+          case "/": {
+            display.value = display.value.slice(0, -1);
+            display.value += e.target.value;
+            whichOperator = e.target.value;
+            return;
+          }
+        }
+
+        // return;
+      }
+      display.value += e.target.value;
+      whichOperator = e.target.value;
+    }
+  })
+);
+
+function sizeCheck() {
+  display.value = "size error";
+  setTimeout(() => {
+    clearEveryThing();
+  }, 3000);
+}
+backBtn.addEventListener("click", function (e) {
+  if (!display.value) return;
+  if (/[+-/x]/g.test(display.value)) {
+    operationBtnClickTime = 1;
+  }
+  display.value = display.value.slice(0, -1);
+  calcData = display.value;
+
+  console.log(calcData, "calcdata back btn");
+});
+
+clearBtn.addEventListener("click", clearEveryThing);
+function clearEveryThing() {
+  display.value = whichOperator = calcData = "";
+  firstNum = secondNum = finalResult = 0;
+  operationBtnClickTime = 1;
+  return;
+}
