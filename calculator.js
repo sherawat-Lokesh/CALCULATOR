@@ -5,6 +5,19 @@ import {display, mathBtn,clearBtn,logBtn,equalBtn,operationBtn,backBtn} from "./
 
 // prettier-ignore
 let firstNum=0,secondNum=0, finalResult = 0,operationBtnClickTime = 1,whichOperator,calcData = "";
+const calcLog = [];
+
+logBtn.addEventListener("click", function (e) {
+  let opened = window.open("");
+  opened.document.write(
+    ` <html><head><title>Calculations</title></head>
+    <body>
+    
+        <p>${calcLog}</p><br>
+    </body>
+    </html>`
+  );
+});
 
 mathBtn.forEach((btn) =>
   btn.addEventListener("click", function (e) {
@@ -41,21 +54,25 @@ function forCalculationSolving() {
     case "x": {
       finalResult = firstNum * secondNum;
       display.value = finalResult;
+      calcLog.push(display.value);
       return;
     }
     case "+": {
       finalResult = +firstNum + +secondNum;
       display.value = finalResult;
+      calcLog.push(display.value);
       return;
     }
     case "-": {
       finalResult = firstNum - secondNum;
       display.value = finalResult;
+      calcLog.push(display.value);
       return;
     }
     case "/": {
       finalResult = firstNum / secondNum;
-      display.value = finalResult;
+      display.value = parseFloat(finalResult).toFixed(1);
+      calcLog.push(display.value);
       return;
     }
   }
