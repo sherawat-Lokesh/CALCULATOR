@@ -4,7 +4,7 @@
 import {display, mathBtn,clearBtn,logBtn,equalBtn,operationBtn,backBtn} from "./domSelect.js";
 
 // prettier-ignore
-let finalResult = 0,operationBtnClickTime = 1,whichOperator,calcData = "";
+let firstNum=0,secondNum=0, finalResult = 0,operationBtnClickTime = 1,whichOperator,calcData = "";
 
 mathBtn.forEach((btn) =>
   btn.addEventListener("click", function (e) {
@@ -13,6 +13,7 @@ mathBtn.forEach((btn) =>
     }
     if (/[+-/x]/g.test(display.value)) {
       operationBtnClickTime--;
+      console.log(operationBtnClickTime);
     }
     display.value += e.target.value;
   })
@@ -20,8 +21,8 @@ mathBtn.forEach((btn) =>
 
 operationBtn.forEach((btn) => {
   btn.addEventListener("click", function (e) {
-    if (operationBtnClickTime !== 0) return;
-    if (operationBtnClickTime === 0) {
+    if (operationBtnClickTime > 0) return;
+    if (operationBtnClickTime <= 0) {
       forCalculationSolving();
     }
   });
@@ -31,8 +32,9 @@ equalBtn.addEventListener("click", forCalculationSolving);
 
 function forCalculationSolving() {
   calcData = display.value;
-  console.log(whichOperator);
+  console.log(calcData);
   const [firstNum, secondNum] = calcData.split(whichOperator);
+  console.log(firstNum, secondNum);
   if (!firstNum && !secondNum) return;
   operationBtnClickTime = 1;
   switch (whichOperator) {
